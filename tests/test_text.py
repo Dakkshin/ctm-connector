@@ -22,7 +22,7 @@ def plan(**over):
     ("(480) 555-0123", "+14805550123"),
     ("480-555-0123", "+14805550123"),
     ("1 480 555 0123", "+14805550123"),
-    ("+44 20 7183 8750", "+442071838750"),
+    ("+44 20 7946 0123", "+442079460123"),
 ])
 def test_normalize_phone(raw, want):
     assert normalize_phone(raw) == want
@@ -80,7 +80,7 @@ def test_problems_collected():
     assert any("empty" in x for x in plan(body="  ").problems)
     assert any("segment cap" in x for x in plan(body="a" * 500).problems)
     assert any("same number" in x for x in plan(to_raw="+18005550100").problems)
-    assert any("toll-free" in x for x in plan(to_raw="+442071838750", tz_name="Europe/London").problems)
+    assert any("toll-free" in x for x in plan(to_raw="+442079460123", tz_name="Europe/London").problems)
 
 
 def test_toll_free_to_canada_is_allowed():
