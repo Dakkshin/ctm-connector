@@ -1,0 +1,4 @@
+ts	tags	decision	why	artifact
+2026-10-16	api,sms,probe	POST /accounts/<id>/sms reads `to` and `from`; the message text goes under msg, message, text and content in one request until a confirmed send shows which name is read	Probed with sentinel recipients (nothing sent): flat and nested `body`/`from_number`/`to_number` all came back all-blank; `to`+`from` parsed. CTM reference is a JS app we cannot fetch, so the text name is unconfirmed	ctm_client.py TEXT_KEYS
+2026-10-16	gate,send	One POST per send, no retries; a timeout or 5xx is `unknown` and blocks the same text until someone checks `texts`	Sending twice to a real person is the one irreversible mistake here; mirrors kayako-filer never retry a send	ctm.py cmd_text, ctm_text.py ledger
+2026-10-16	scope,bulk	Bulk scheduled campaigns stay a browser workflow; the connector covers single texts and lookups only	ctm-bulk-sms skill documents the Scheduled texts form; no bulk API route is confirmed	AGENTS.md
